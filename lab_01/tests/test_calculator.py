@@ -1,4 +1,5 @@
 import pytest
+
 from toolkit.calculator import calculate
 from toolkit.errors import (
     DivByZeroError,
