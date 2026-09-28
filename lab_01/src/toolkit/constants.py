@@ -14,7 +14,6 @@ LENGTH_FACTORS: dict[str, float] = {
 MASS_FACTORS: dict[str, float] = {
     "g": 0.001,
     "kg": 1.0,
-    "t": 1000.0
 }
 
 OPERATOR_PRIORITY: dict[str, int] = {

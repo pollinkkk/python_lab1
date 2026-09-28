@@ -63,7 +63,7 @@ def check_empty_expression(tokens: list[str]) -> None:
     if not tokens:
         raise EmptyExpressionError("Введена пустая строка.")
 
-    
+
 def validate_and_prepare_tokens(tokens: list[str]) -> list[str]:
     """Находит недопустимые символы и ошибки в строке, проверяет скобки и унарные плюс и минус"""
     stack: list[str] = []
@@ -86,10 +86,8 @@ def validate_and_prepare_tokens(tokens: list[str]) -> list[str]:
 
         if token == "(":
             if not expect_operand:
-                raise MissingOperatorError(
-                    "Пропущен оператор перед скобкой"
-                )
-            
+                raise MissingOperatorError("Пропущен оператор перед скобкой")
+
             stack.append("(")
             prepared_tokens.append(token)
             expect_operand = True
@@ -102,17 +100,15 @@ def validate_and_prepare_tokens(tokens: list[str]) -> list[str]:
                 )
 
             if expect_operand:
-                raise MissingOperandError(
-                    "Пропущен операнд перед закрывающей скобкой"
-                )
-               
+                raise MissingOperandError("Пропущен операнд перед закрывающей скобкой")
+
             stack.pop()
             prepared_tokens.append(token)
             expect_operand = False
             continue
 
         if token in "+-":
-            if expect_operand: 
+            if expect_operand:
                 prepared_tokens.append("u" + token)
             else:
                 prepared_tokens.append(token)
@@ -123,13 +119,9 @@ def validate_and_prepare_tokens(tokens: list[str]) -> list[str]:
         if token in ("*", "/", "//", "%"):
             if expect_operand:
                 if not prepared_tokens or prepared_tokens[-1] == "(":
-                    raise MissingOperandError(
-                        "Пропущен операнд"
-                    )
-                
-                raise TwoBinOperatorsError(
-                    "Две бинарные операции подряд"
-                )
+                    raise MissingOperandError("Пропущен операнд")
+
+                raise TwoBinOperatorsError("Две бинарные операции подряд")
 
             prepared_tokens.append(token)
             expect_operand = True
@@ -141,7 +133,7 @@ def validate_and_prepare_tokens(tokens: list[str]) -> list[str]:
 
     if expect_operand:
         raise MissingOperandError("Пропущен операнд")
-    
+
     return prepared_tokens
 
 
@@ -218,7 +210,7 @@ def evaluate_rpn(tokens: list[str]) -> float:
         elif token == "/":
             if right_operand == 0:
                 raise DivByZeroError("Деление на ноль")
-        
+
             result = left_operand / right_operand
         elif token == "//":
             if right_operand == 0:
@@ -244,5 +236,3 @@ def calculate(expression: str) -> float:
     prepared_tokens = validate_and_prepare_tokens(tokens)
     rpn_tokens = to_rpn(prepared_tokens)
     return evaluate_rpn(rpn_tokens)
-
-

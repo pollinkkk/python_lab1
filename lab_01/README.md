@@ -153,6 +153,8 @@ py -m venv .venv
 # Установка проекта в режиме редактирования:
 
 ``` shell
+pip install -r requirements.txt
+
 py -m pip install -e .
 ``` 
 ## Запуск программы
@@ -166,19 +168,19 @@ python -m toolkit --help
 # Запуск калькулятора:
 
 ``` shell
-python -m toolkit calc "2 + 3 * 4"
+python -m toolkit calc "2+3*4"
 ``` 
 
 # Пример со скобками:
 
 ``` shell
-python -m toolkit calc "(2 + 3) * -4"
+python -m toolkit calc "(2+3)*-4"
 ```
 
 # Пример с целочисленным делением и остатком:
 
 ``` shell
-python -m toolkit calc "-7 // 2 + 7 % 2"
+python -m toolkit calc "-7//2+7%2"
 ```
 
 # Запуск конвертера:
@@ -219,6 +221,13 @@ python -m pytest
 
 ``` shell
 ruff check .
+```
+# Для проверки кода используется mypy.
+
+Команда проверки:
+
+``` shell
+mypy src
 ```
 
 # Зависимости

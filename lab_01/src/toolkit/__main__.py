@@ -47,7 +47,7 @@ def main() -> int:
 
         print(result)
         return 0
-        
+
     except ToolkitError as error:
         print(error, file=sys.stderr)
         return 2
